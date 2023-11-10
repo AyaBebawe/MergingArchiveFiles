@@ -1,12 +1,6 @@
 ﻿using MergingArchiveFiles.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.IO.Compression;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace MergingArchiveFiles.Controllers
 {
@@ -16,19 +10,22 @@ namespace MergingArchiveFiles.Controllers
     {
         private readonly IMergeArchiveFilesService _mergeArchiveService;
 
+
+        // Constructor to inject the merge archive service
         public MergeArchiveFilesController(IMergeArchiveFilesService mergeArchiveService)
         {
             _mergeArchiveService = mergeArchiveService;
         }
-
+        // Action method for handling HTTP POST requests with multipart form data
         [HttpPost]
         [Consumes("multipart/form-data")]
-        [RequestSizeLimit(3L * 1024 * 1024 * 1024)] // 3 GB
+        [RequestSizeLimit(3L * 1024 * 1024 * 1024)] // Limits the request size to 3 GB
         public async Task<IActionResult> MergeZipFiles([FromForm] List<IFormFile> zipFiles)
         {
             try
             {
-              return  await _mergeArchiveService.MergeZipFiles(zipFiles);
+                // Call the service to merge ZIP files
+                return await _mergeArchiveService.MergeZipFiles(zipFiles);
             }
             catch
             {
