@@ -12,7 +12,7 @@ namespace MergingArchiveFiles.Controllers
     [ApiController]
     public class MergeArchiveFilesUsingBufferController : ControllerBase
     {
-        private const int BufferSize = 8192; // Set an appropriate buffer size
+        private const int BufferSize = 8192; 
 
         [HttpPost]
         [Consumes("multipart/form-data")]
@@ -60,16 +60,13 @@ namespace MergingArchiveFiles.Controllers
                     memoryStream.Seek(0, SeekOrigin.Begin);
                     var zipBytes = memoryStream.ToArray();
 
-                    // Return the merged ZIP archive as a downloadable file
                     return File(zipBytes, "application/zip", "merged.zip");
                 }
             }
             catch (Exception ex)
             {
-                // Log the exception for debugging and troubleshooting
                 Console.WriteLine($"Error: {ex.Message}");
 
-                // Return an error response to the client
                 return BadRequest("An error occurred while merging ZIP files.");
             }
         }

@@ -1,3 +1,4 @@
+using MergingArchiveFiles.Services;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 
@@ -44,6 +45,7 @@ builder.Services.Configure<KestrelServerOptions>(options =>
 {
     options.Limits.MaxRequestBodySize = 3L * 1024 * 1024 * 1024;
 });
+builder.Services.AddScoped<IMergeArchiveFilesService, MergeArchiveFilesService>();
 
 
 var app = builder.Build();
