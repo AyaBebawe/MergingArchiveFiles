@@ -7,7 +7,7 @@ namespace MergingArchiveFiles.Services
     {
 
            // Allowed file extensions for validation
-            private readonly string[] AllowedExtensions = { ".zip", ".7z" };
+            private readonly string[] AllowedExtensions = { ".zip" };
            
            // Logger for logging messages
             private readonly ILogger<MergeArchiveFilesService> _logger;
